@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home') }}">Boutique</br> La maison</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if routeName == 'home' %}active{% endif %}" href="{{ path('home') }}">Retour à l'accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link {% if routeName == 'admin_product_index' %}active{% endif %}" href="{{ path('admin_product_index') }}">Dashboard<span class="sr-only">(current)</span></a>    
+                </li>
+                <li>
+                    <a class="nav-link {% if routeName == 'admin_product_new' %}active{% endif %}" href="{{ path('admin_product_new') }}">Ajouter un produit<span class="sr-only">(current)</span></a>    
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </div>
+</nav>

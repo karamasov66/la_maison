@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <img src="{{asset('assets/images/' ~ product.geturlImage())}}">
+            </div>
+            <div class="col-md-3">
+                <p>{{product.name}}</p>
+                <p>Ref : {{product.reference}}</p>
+                <p>Prix : {{product.price}} euros</p>
+                <select>
+                    <option value="">Taille</option>
+                    {% for size in product.sizes %}
+                    <option value="{{size.name}}">{{size.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <p>Description:</p>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('admin_product_index') }}">Retour à la liste</a></br>
+
+    <a class="btn btn-primary" href="{{ path('admin_product_edit', {'id': product.id}) }}">Modifier</a>
+
+    {{ include('admin/product/_delete_form.html.twig') }}
+
+{% endblock %}

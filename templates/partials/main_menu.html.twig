@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home') }}">Boutique</br> La maison</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if routeName == 'home' %}active{% endif %}" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if routeName == 'category_show' and params == category.id %}active{% endif %}" href="{{ path('category_show', {id: category.id}) }}">{{category.name}}<span class="sr-only">(current)</span></a>
+                    </li>
+                {% endfor %}
+                <li>
+                    <a class="nav-link {% if routeName == 'product_code' %}active{% endif %}" href="{{ path('product_code', {slug: 'soldes'}) }}">Soldes<span class="sr-only">(current)</span></a>    
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ path('app_register') }}">Register</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="nav-link" href="{{ path('admin_product_index')}}">Gestion</a></li>
+                {% endif %}
+            </ul>
+        </div>
+</nav>
